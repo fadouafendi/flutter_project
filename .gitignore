@@ -10,6 +10,7 @@
 .history
 .svn/
 .swiftpm/
+.vscode
 migrate_working_dir/
 
 # IntelliJ related
@@ -43,3 +44,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+# custom
+content.sh
+project.txt
+.env

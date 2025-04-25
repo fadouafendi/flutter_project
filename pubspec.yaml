@@ -11,9 +11,12 @@ dependencies:
     sdk: flutter
   firebase_core: ^3.12.1
   firebase_auth: ^5.5.1
+  http: ^0.13.5
+  firebase_database: ^11.3.5
   cloud_firestore: ^5.6.6
   firebase_storage: ^12.4.5
   google_sign_in: ^6.3.0
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +27,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - .env
