@@ -16,7 +16,6 @@ class Track {
   factory Track.fromJson(Map<String, dynamic> json) {
     final images = json['album']['images'] as List;
     final imageUrl = images.isNotEmpty ? images[0]['url'] as String : '';
-
     return Track(
       id: json['id'] as String,
       name: json['name'] as String,

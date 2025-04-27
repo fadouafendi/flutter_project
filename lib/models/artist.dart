@@ -16,14 +16,11 @@ class Artist {
   factory Artist.fromJson(Map<String, dynamic> json) {
     final images = json['images'] as List;
     final imageUrl = images.isNotEmpty ? images[0]['url'] as String : '';
-
     return Artist(
       id: json['id'] as String,
       name: json['name'] as String,
       imageUrl: imageUrl,
-      genres:
-          (json['genres'] as List?)?.map((genre) => genre as String).toList() ??
-              [],
+      genres: (json['genres'] as List?)?.map((g) => g as String).toList() ?? [],
       popularity: json['popularity'] as int?,
     );
   }

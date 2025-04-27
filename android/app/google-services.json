@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "641531430922",
+    "firebase_url": "https://flutterfirebase-2c9d2-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "flutterfirebase-2c9d2",
     "storage_bucket": "flutterfirebase-2c9d2.firebasestorage.app"
   },
@@ -12,7 +13,28 @@
           "package_name": "com.example.flutter_application_1"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "641531430922-9macnc6mduhp891q9i7qtisghntdl716.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_application_1",
+            "certificate_hash": "72271ed967fc8ad27e2de9f927ec666b5c211d62"
+          }
+        },
+        {
+          "client_id": "641531430922-qneka2hi35jrt26qducq8agim1dpiirc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_application_1",
+            "certificate_hash": "cad62822bb64d3e078f02fc2dcf7e153e14f5dbf"
+          }
+        },
+        {
+          "client_id": "641531430922-4j239n7li3g9l63bthc6h69tckosrrf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCvw6FUsEN_XZwci0Ll-hLcT0-G3IRdYR0"
@@ -20,7 +42,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "641531430922-4j239n7li3g9l63bthc6h69tckosrrf9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "641531430922-f4b3lepio03knh3ev1lqfts8sdaiilnr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApplication1"
+              }
+            }
+          ]
         }
       }
     }
