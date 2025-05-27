@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
@@ -20,33 +20,27 @@ class AuthService {
       throw AuthException(_getErrorMessage(e.code));
     }
   }
-Future<void> signinWithGoogle()async{
-      try {
-      // Trigger Google Sign-In flow
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return null;
 
-      // Obtain auth details from request
-      final GoogleSignInAuthentication googleAuth = 
-          await googleUser.authentication;
+  Future<void> signInWithGoogle() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
 
-      // Create credential
-      final AuthCredential credential = GoogleAuthProvider.credential(
+    if (kIsWeb) {
+      final webProvider = GoogleAuthProvider()
+        ..setCustomParameters({'prompt': 'select_account'});
+      await _auth.signInWithPopup(webProvider);
+    } else {
+      final googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        throw AuthException('Sign in aborted by user');
+      }
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-
-      // Sign in to Firebase with Google credentials
-      UserCredential userCredential = 
-          await _auth.signInWithCredential(credential);
-          print("you're connected");
-    } on FirebaseAuthException catch (e) {
-      throw AuthException(_getErrorMessage(e.code));
-    } catch (e) {
-      throw AuthException('Failed to sign in with Google');
+      await _auth.signInWithCredential(credential);
     }
-}
-
+  }
 
   Future<User?> signInWithEmail(String email, String password) async {
     try {
@@ -78,12 +72,18 @@ Future<void> signinWithGoogle()async{
 
   String _getErrorMessage(String code) {
     switch (code) {
-      case 'weak-password': return 'Le mot de passe est trop faible';
-      case 'email-already-in-use': return 'Cet email est déjà utilisé';
-      case 'user-not-found': return 'Aucun utilisateur trouvé pour cet email';
-      case 'wrong-password': return 'Mot de passe incorrect';
-      case 'invalid-email': return 'Email invalide';
-      default: return 'Une erreur est survenue';
+      case 'weak-password':
+        return 'Le mot de passe est trop faible';
+      case 'email-already-in-use':
+        return 'Cet email est déjà utilisé';
+      case 'user-not-found':
+        return 'Aucun utilisateur trouvé pour cet email';
+      case 'wrong-password':
+        return 'Mot de passe incorrect';
+      case 'invalid-email':
+        return 'Email invalide';
+      default:
+        return 'Une erreur est survenue';
     }
   }
 }

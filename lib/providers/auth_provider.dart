@@ -55,7 +55,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     try {
       errorMessage = null;
-      await _authService.signinWithGoogle();
+      await _authService.signInWithGoogle();
     } catch (e) {
       errorMessage =
           e is AuthException ? e.message : 'Échec de la connexion Google';
