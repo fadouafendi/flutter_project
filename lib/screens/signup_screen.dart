@@ -89,8 +89,8 @@ class _SignupScreenState extends State<SignupScreen> {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage('https://t4.ftcdn.net/jpg/10/34/83/69/360_F_1034836976_6yuRCtFQ5gzX84yo7zcDp2RKEPcOqsag.jpg'),
-                fit: BoxFit.cover,
+                image: NetworkImage('https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'),
+              fit: BoxFit.fill,
               ),
             ),
           ),
