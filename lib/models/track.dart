@@ -4,6 +4,7 @@ class Track {
   final String artist;
   final String imageUrl;
   final String? previewUrl;
+   bool isFavorite; 
 
   Track({
     required this.id,
@@ -11,6 +12,7 @@ class Track {
     required this.artist,
     required this.imageUrl,
     this.previewUrl,
+    this.isFavorite = false,
   });
 
   factory Track.fromJson(Map<String, dynamic> json) {

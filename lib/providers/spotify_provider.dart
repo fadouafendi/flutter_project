@@ -24,4 +24,9 @@ class SpotifyProvider extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  void toggleFavorite(Track track) {
+    track.isFavorite = !track.isFavorite;
+    notifyListeners(); // Notify widgets that depend on this provider
+  }
 }
