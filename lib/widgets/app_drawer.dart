@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/providers/spotify_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
@@ -34,7 +35,9 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () async {
-              Navigator.pop(context);
+                final spotifyProvider = context.read<SpotifyProvider>();
+                spotifyProvider.clearFavorites();
+                  Navigator.pop(context);
               await auth.signOut();
             },
           ),

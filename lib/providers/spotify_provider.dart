@@ -19,7 +19,7 @@ class SpotifyProvider extends ChangeNotifier {
       tracks = fetchedTracks;
       artists = fetchedArtists;
     } catch (_) {
-      // Vous pouvez gérer l'erreur ici si besoin
+   
     }
     isLoading = false;
     notifyListeners();
@@ -27,6 +27,15 @@ class SpotifyProvider extends ChangeNotifier {
 
   void toggleFavorite(Track track) {
     track.isFavorite = !track.isFavorite;
-    notifyListeners(); // Notify widgets that depend on this provider
+    notifyListeners(); 
+  }
+
+
+  void clearFavorites() {
+    for (var track in tracks) {
+      track.isFavorite = false; 
+    }
+    notifyListeners(); 
+    debugPrint('All favorites cleared!');
   }
 }
