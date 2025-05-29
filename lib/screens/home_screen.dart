@@ -18,7 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(_currentIndex == 0 ? 'Top Tracks' : 'Top Artists')),
+          title: Text(
+  _currentIndex == 0
+      ? 'Top Tracks'
+      : _currentIndex == 1
+          ? 'Top Artists'
+          : 'Your Favorites'
+),),
+          
       drawer: AppDrawer(),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
