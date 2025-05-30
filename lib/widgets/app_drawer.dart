@@ -9,6 +9,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.read<AuthProvider>();
     final user = auth.user;
+    
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -18,7 +19,7 @@ class AppDrawer extends StatelessWidget {
             accountEmail: Text(user?.email ?? ''),
             currentAccountPicture: CircleAvatar(
               child: Text(
-                user?.displayName?.substring(0, 1).toUpperCase() ?? '?',
+                user?.displayName?.substring(0, 1).toUpperCase() ?? '?', 
                 style: const TextStyle(fontSize: 24),
               ),
             ),
@@ -37,8 +38,20 @@ class AppDrawer extends StatelessWidget {
             onTap: () async {
                 final spotifyProvider = context.read<SpotifyProvider>();
                 spotifyProvider.clearFavorites();
-                  Navigator.pop(context);
-              await auth.signOut();
+                  Navigator.pop(context); // Close the drawer first
+              try {
+                await auth.signOut();
+                // Clear all routes and go to login
+                Navigator.pushNamedAndRemoveUntil(
+                  context, 
+                  '/login', 
+                  (route) => false
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Logout failed: ${e.toString()}'))
+                );
+              }
             },
           ),
         ],

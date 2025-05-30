@@ -43,14 +43,30 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
-  Future<void> _handleSignIn() async {
-    if (_formKey.currentState!.validate()) {
+Future<void> _handleSignIn() async {
+  if (_formKey.currentState!.validate()) {
+    try {
       await context.read<AuthProvider>().signIn(
-            _emailController.text.trim(),
-            _passwordController.text,
-          );
+        _emailController.text.trim(),
+        _passwordController.text,
+      );
+      
+      if (mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/splash',
+          (route) => false, // Clear all routes
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login failed: ${e.toString()}'))
+        );
+      }
     }
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 constraints: const BoxConstraints(maxWidth: 400),
                 padding: const EdgeInsets.all(32.0),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
@@ -138,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                          color: Colors.white,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -258,7 +274,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/forgot-password');
                           },
-                          child: const Text('Forgot Password?'),
+                          child: const Text(
+                        'Forgot password',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -304,7 +328,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () => Navigator.pushNamed(context, '/signup'),
                             child: const Text(
                               'Sign Up',
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              
+                        ),
                             ),
                           ),
                         ],

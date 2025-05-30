@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/spotify_provider.dart'; // Make sure this path is correct
-import '../models/track.dart';             // Make sure this path is correct
 
 class FavoritesScreen extends StatelessWidget {
   @override
@@ -22,7 +21,7 @@ class FavoritesScreen extends StatelessWidget {
         child: favoriteTracks.isEmpty
             ? const Center(
                 child: Text(
-                  'No favorite movies yet!',
+                  'No favorite tracks yet!',
                   style: TextStyle(
                     color: Colors.white70, // Lighter text for dark background
                     fontSize: 18,

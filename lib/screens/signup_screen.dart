@@ -75,7 +75,10 @@ class _SignupScreenState extends State<SignupScreen> {
             _passwordController.text,
             _nameController.text.trim(),
           );
-    }
+    if (mounted && context.read<AuthProvider>().errorMessage == null) {
+          Navigator.pushReplacementNamed(context, '/login');
+        }
+      }
   }
 
   @override

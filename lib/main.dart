@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/screens/favorites_screen.dart';
+import 'package:flutter_application_1/screens/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
@@ -101,6 +102,8 @@ class MyApp extends StatelessWidget {
         '/trackDetail': (_) => TrackDetailScreen(),
         '/artistDetail': (_) => ArtistDetailScreen(),
         '/facorites': (_) => FavoritesScreen(),
+        '/splash': (_) => SplashScreen(onComplete: () {  },),
+        '/main-screen': (_) => HomeScreen(),
       },
       home: AuthWrapper(),
     );
