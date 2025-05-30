@@ -38,10 +38,9 @@ class AppDrawer extends StatelessWidget {
             onTap: () async {
               final spotifyProvider = context.read<SpotifyProvider>();
               spotifyProvider.clearFavorites();
-              Navigator.pop(context); // Close the drawer first
+              Navigator.pop(context);
               try {
                 await auth.signOut();
-                // Clear all routes and go to login
                 Navigator.pushNamedAndRemoveUntil(
                     context, '/login', (route) => false);
               } catch (e) {

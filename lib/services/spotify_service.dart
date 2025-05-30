@@ -25,7 +25,6 @@ class SpotifyService {
     return secret;
   }
 
-  // For debugging
   bool _debugMode = true;
 
   void _logDebug(String message) {
@@ -35,7 +34,6 @@ class SpotifyService {
   }
 
   Future<String> _getAccessToken() async {
-    // Return existing token if it's still valid
     if (_accessToken != null &&
         _tokenExpiry != null &&
         _tokenExpiry!.isAfter(DateTime.now())) {
@@ -136,7 +134,6 @@ class SpotifyService {
       final token = await _getAccessToken();
       final trackIdsString = trackIds.join(',');
 
-      // Use the proper endpoint for fetching multiple tracks
       final response = await http.get(
         Uri.parse('$_baseUrl/tracks?ids=$trackIdsString&market=fr'),
         headers: {
@@ -152,7 +149,6 @@ class SpotifyService {
 
       final data = jsonDecode(response.body);
 
-      // Check if the response contains the tracks array
       if (data['tracks'] == null) {
         _logDebug('Unexpected response format: ${response.body}');
         return [];
@@ -161,21 +157,17 @@ class SpotifyService {
       final tracksData = data['tracks'] as List;
       _logDebug('Got ${tracksData.length} tracks');
 
-      // Map the track objects to our Track model
       List<Track> tracks = [];
 
       for (var trackData in tracksData) {
-        // Skip null tracks (which can happen if a track is unavailable in the market)
         if (trackData == null) continue;
 
         try {
           tracks.add(Track.fromJson(trackData));
         } catch (e) {
           _logDebug('Error parsing track: $e');
-          // Continue with next track
         }
 
-        // Limit to 20 tracks if needed
         if (tracks.length >= 20) break;
       }
 
@@ -246,7 +238,6 @@ class SpotifyService {
       final token = await _getAccessToken();
       final artistIdsString = artistIds.join(',');
 
-      // Use the proper endpoint for fetching multiple artists
       final response = await http.get(
         Uri.parse('$_baseUrl/artists?ids=$artistIdsString'),
         headers: {
@@ -262,7 +253,6 @@ class SpotifyService {
 
       final data = jsonDecode(response.body);
 
-      // Check if the response contains the artists array
       if (data['artists'] == null) {
         _logDebug('Unexpected response format: ${response.body}');
         return [];
@@ -271,21 +261,17 @@ class SpotifyService {
       final artistsData = data['artists'] as List;
       _logDebug('Got ${artistsData.length} artists');
 
-      // Map the artist objects to our Artist model
       List<Artist> artists = [];
 
       for (var artistData in artistsData) {
-        // Skip null artists (which can happen if an artist is unavailable)
         if (artistData == null) continue;
 
         try {
           artists.add(Artist.fromJson(artistData));
         } catch (e) {
           _logDebug('Error parsing artist: $e');
-          // Continue with next artist
         }
 
-        // Limit to 20 artists if needed
         if (artists.length >= 20) break;
       }
 

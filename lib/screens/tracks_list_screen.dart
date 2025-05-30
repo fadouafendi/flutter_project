@@ -46,7 +46,7 @@ class _TracksListScreenState extends State<TracksListScreen> {
                     color: track.isFavorite ? Colors.red : Colors.grey,
                   ),
                   onPressed: () {
-                    provider.toggleFavorite(track); // Toggle favorite status
+                    provider.toggleFavorite(track);
                   },
                 ),
                 const SizedBox(width: 8),

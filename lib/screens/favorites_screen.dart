@@ -8,18 +8,17 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SpotifyProvider>(
       builder: (context, provider, child) {
-        // Filter the tracks to get only the favorites
         final favoriteTracks =
             provider.tracks.where((track) => track.isFavorite).toList();
 
         return Container(
-          color: Colors.black, // Dark background for the body
+          color: Colors.black,
           child: favoriteTracks.isEmpty
               ? const Center(
                   child: Text(
                     'No favorite tracks yet!',
                     style: TextStyle(
-                      color: Colors.white70, // Lighter text for dark background
+                      color: Colors.white70,
                       fontSize: 18,
                     ),
                   ),
@@ -32,11 +31,11 @@ class FavoritesScreen extends StatelessWidget {
                     return Card(
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       elevation: 2,
-                      color: Colors.grey[900], // Darker card background
+                      color: Colors.grey[900],
                       child: ListTile(
                         leading: Hero(
                           tag:
-                              'trackImage-${track.id}-favorite', // Unique tag for favorite screen hero animation
+                              'trackImage-${track.id}-favorite',
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(4),
                             child: Image.network(track.imageUrl,
@@ -60,7 +59,6 @@ class FavoritesScreen extends StatelessWidget {
                             color: track.isFavorite ? Colors.red : Colors.grey,
                           ),
                           onPressed: () {
-                            // Toggling favorite directly from the favorites screen
                             provider.toggleFavorite(track);
                           },
                         ),

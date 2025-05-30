@@ -12,12 +12,8 @@ class _ArtistsListScreenState extends State<ArtistsListScreen> {
   @override
   void initState() {
     super.initState();
-    // This ensures context is available after the first frame is rendered.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final spotifyProvider = context.read<SpotifyProvider>();
-
-      // IMPORTANT CHECK: Only load data if the tracks list is empty
-      // and if it's not already in the process of loading.
       if (spotifyProvider.tracks.isEmpty && !spotifyProvider.isLoading) {
         spotifyProvider.loadData();
       }
