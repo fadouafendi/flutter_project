@@ -9,12 +9,10 @@ class TrackDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Track Details')),
       body: Center(
-        // ← wrap in Center
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 16), // ← only horizontal gutters
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
-            mainAxisSize: MainAxisSize.min, // ← shrink‐wrap height
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Hero(
@@ -45,9 +43,7 @@ class TrackDetailScreen extends StatelessWidget {
               const SizedBox(height: 16),
               if (track.previewUrl != null)
                 ElevatedButton(
-                  onPressed: () {
-                    // implémenter la lecture si souhaité
-                  },
+                  onPressed: () {},
                   child: const Text('Play Preview'),
                 ),
             ],

@@ -11,14 +11,12 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
       body: Center(
-        // ← center everything vertically & horizontally
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 16), // ← only horizontal gutters
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: user == null
               ? const Text('No user logged in')
               : Column(
-                  mainAxisSize: MainAxisSize.min, // ← shrink‐wrap height
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Icon(Icons.person, size: 100),

@@ -75,29 +75,29 @@ class _SignupScreenState extends State<SignupScreen> {
             _passwordController.text,
             _nameController.text.trim(),
           );
-    if (mounted && context.read<AuthProvider>().errorMessage == null) {
-          Navigator.pushReplacementNamed(context, '/login');
-        }
+      if (mounted && context.read<AuthProvider>().errorMessage == null) {
+        Navigator.pushReplacementNamed(context, '/login');
       }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
-    
+
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image - Same movie background as login
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage('https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'),
-              fit: BoxFit.fill,
+                image: NetworkImage(
+                    'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'),
+                fit: BoxFit.fill,
               ),
             ),
           ),
-          
+
           // Gradient Overlay
           Container(
             decoration: BoxDecoration(
@@ -112,8 +112,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
           ),
-          
-          // Main Content
+
           SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -138,10 +137,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // Logo or App Icon
-              
-                        
-                        // Welcome Text
                         const Text(
                           'Create Account',
                           style: TextStyle(
@@ -161,8 +156,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 32),
-
-                        // Error Message
                         if (auth.errorMessage != null)
                           Container(
                             margin: const EdgeInsets.only(bottom: 16),
@@ -174,19 +167,19 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             child: Row(
                               children: [
-                                Icon(Icons.error_outline, color: Colors.red.shade700),
+                                Icon(Icons.error_outline,
+                                    color: Colors.red.shade700),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
                                     auth.errorMessage!,
-                                    style: TextStyle(color: Colors.red.shade700),
+                                    style:
+                                        TextStyle(color: Colors.red.shade700),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-
-                        // Full Name Field
                         TextFormField(
                           controller: _nameController,
                           style: const TextStyle(color: Colors.black),
@@ -195,17 +188,20 @@ class _SignupScreenState extends State<SignupScreen> {
                             labelStyle: const TextStyle(color: Colors.black87),
                             hintText: 'Enter your full name',
                             hintStyle: const TextStyle(color: Colors.black54),
-                            prefixIcon: const Icon(Icons.person_outlined, color: Colors.black54),
+                            prefixIcon: const Icon(Icons.person_outlined,
+                                color: Colors.black54),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Colors.grey.shade400),
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor),
                             ),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.9),
@@ -215,8 +211,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           validator: _validateName,
                         ),
                         const SizedBox(height: 16),
-
-                        // Email Field
                         TextFormField(
                           controller: _emailController,
                           style: const TextStyle(color: Colors.black),
@@ -225,17 +219,20 @@ class _SignupScreenState extends State<SignupScreen> {
                             labelStyle: const TextStyle(color: Colors.black87),
                             hintText: 'Enter your email',
                             hintStyle: const TextStyle(color: Colors.black54),
-                            prefixIcon: const Icon(Icons.email_outlined, color: Colors.black54),
+                            prefixIcon: const Icon(Icons.email_outlined,
+                                color: Colors.black54),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Colors.grey.shade400),
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor),
                             ),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.9),
@@ -246,8 +243,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           validator: _validateEmail,
                         ),
                         const SizedBox(height: 16),
-
-                        // Password Field
                         TextFormField(
                           controller: _passwordController,
                           obscureText: _obscurePassword,
@@ -257,10 +252,13 @@ class _SignupScreenState extends State<SignupScreen> {
                             labelStyle: const TextStyle(color: Colors.black87),
                             hintText: 'Enter your password',
                             hintStyle: const TextStyle(color: Colors.black54),
-                            prefixIcon: const Icon(Icons.lock_outlined, color: Colors.black54),
+                            prefixIcon: const Icon(Icons.lock_outlined,
+                                color: Colors.black54),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                                _obscurePassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
                                 color: Colors.black54,
                               ),
                               onPressed: () {
@@ -274,11 +272,13 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Colors.grey.shade400),
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor),
                             ),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.9),
@@ -288,8 +288,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           validator: _validatePassword,
                         ),
                         const SizedBox(height: 16),
-
-                        // Confirm Password Field
                         TextFormField(
                           controller: _confirmController,
                           obscureText: _obscureConfirmPassword,
@@ -299,15 +297,19 @@ class _SignupScreenState extends State<SignupScreen> {
                             labelStyle: const TextStyle(color: Colors.black87),
                             hintText: 'Confirm your password',
                             hintStyle: const TextStyle(color: Colors.black54),
-                            prefixIcon: const Icon(Icons.lock_outlined, color: Colors.black54),
+                            prefixIcon: const Icon(Icons.lock_outlined,
+                                color: Colors.black54),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
+                                _obscureConfirmPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
                                 color: Colors.black54,
                               ),
                               onPressed: () {
                                 setState(() {
-                                  _obscureConfirmPassword = !_obscureConfirmPassword;
+                                  _obscureConfirmPassword =
+                                      !_obscureConfirmPassword;
                                 });
                               },
                             ),
@@ -316,11 +318,13 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Colors.grey.shade400),
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor),
                             ),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.9),
@@ -331,8 +335,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           onFieldSubmitted: (_) => _handleSignUp(),
                         ),
                         const SizedBox(height: 24),
-
-                        // Sign Up Button
                         ElevatedButton(
                           onPressed: auth.isLoading ? null : _handleSignUp,
                           style: ElevatedButton.styleFrom(
@@ -348,7 +350,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                   width: 20,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation(Colors.white),
+                                    valueColor:
+                                        AlwaysStoppedAnimation(Colors.white),
                                   ),
                                 )
                               : const Text(
@@ -360,8 +363,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                         ),
                         const SizedBox(height: 24),
-
-                        // Sign In Link
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -379,8 +380,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           ],
                         ),
                         const SizedBox(height: 16),
-
-                        // Divider
                         const Row(
                           children: [
                             Expanded(child: Divider()),
@@ -395,12 +394,12 @@ class _SignupScreenState extends State<SignupScreen> {
                           ],
                         ),
                         const SizedBox(height: 16),
-
-                        // Google Sign Up Button
                         OutlinedButton.icon(
                           onPressed: auth.isLoading
                               ? null
-                              : () => context.read<AuthProvider>().signInWithGoogle(),
+                              : () => context
+                                  .read<AuthProvider>()
+                                  .signInWithGoogle(),
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             shape: RoundedRectangleBorder(

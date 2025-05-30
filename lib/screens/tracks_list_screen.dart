@@ -9,13 +9,13 @@ class TracksListScreen extends StatefulWidget {
 }
 
 class _TracksListScreenState extends State<TracksListScreen> {
-@override
+  @override
   void initState() {
     super.initState();
-    // Use WidgetsBinding.instance.addPostFrameCallback to ensure context is available
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final spotifyProvider = context.read<SpotifyProvider>();
-      // Only load data if it hasn't been loaded already
+
       if (spotifyProvider.tracks.isEmpty && !spotifyProvider.isLoading) {
         spotifyProvider.loadData();
       }
@@ -37,19 +37,19 @@ class _TracksListScreenState extends State<TracksListScreen> {
           margin: const EdgeInsets.symmetric(vertical: 6),
           elevation: 2,
           child: ListTile(
-            leading: Row( // Use a Row to place multiple widgets in leading
-              mainAxisSize: MainAxisSize.min, // Essential to constrain the row's width
+            leading: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
                   icon: Icon(
                     track.isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: track.isFavorite ? Colors.red : Colors.grey, // Red for favorited, grey for not
+                    color: track.isFavorite ? Colors.red : Colors.grey,
                   ),
                   onPressed: () {
                     provider.toggleFavorite(track); // Toggle favorite status
                   },
                 ),
-                const SizedBox(width: 8), // Add some spacing between icon and image
+                const SizedBox(width: 8),
                 Hero(
                   tag: 'trackImage-${track.id}',
                   child: ClipRRect(

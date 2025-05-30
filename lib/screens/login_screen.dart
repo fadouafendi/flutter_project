@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.pushNamedAndRemoveUntil(
             context,
             '/main-screen',
-            (route) => false, // Clear all routes
+            (route) => false,
           );
         }
       } catch (e) {
@@ -85,7 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
 
-          // Gradient Overlay (for better text readability with movie background)
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -100,7 +99,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
 
-          // Main Content
           SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -125,7 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // Logo or App Icon
                         Container(
                           height: 80,
                           width: 80,
@@ -150,7 +147,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
 
-                        // Welcome Text
                         const Text(
                           'Welcome Back!',
                           style: TextStyle(
@@ -171,7 +167,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 32),
 
-                        // Error Message
                         if (auth.errorMessage != null)
                           Container(
                             margin: const EdgeInsets.only(bottom: 16),
@@ -197,20 +192,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
 
-                        // Email Field
                         TextFormField(
                           controller: _emailController,
-                          style: const TextStyle(
-                              color: Colors.black), // Add this line
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             labelText: 'Email',
-                            labelStyle: const TextStyle(
-                                color: Colors.black87), // Add this line
+                            labelStyle: const TextStyle(color: Colors.black87),
                             hintText: 'Enter your email',
-                            hintStyle: const TextStyle(
-                                color: Colors.black54), // Add this line
+                            hintStyle: const TextStyle(color: Colors.black54),
                             prefixIcon: const Icon(Icons.email_outlined,
-                                color: Colors.black54), // Update color
+                                color: Colors.black54),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -225,8 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Theme.of(context).primaryColor),
                             ),
                             filled: true,
-                            fillColor: Colors.white.withOpacity(
-                                0.9), // Increase opacity for better readability
+                            fillColor: Colors.white.withOpacity(0.9),
                           ),
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
@@ -239,23 +229,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextFormField(
                           controller: _passwordController,
                           obscureText: _obscurePassword,
-                          style: const TextStyle(
-                              color: Colors.black), // Add this line
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            labelStyle: const TextStyle(
-                                color: Colors.black87), // Add this line
+                            labelStyle: const TextStyle(color: Colors.black87),
                             hintText: 'Enter your password',
-                            hintStyle: const TextStyle(
-                                color: Colors.black54), // Add this line
+                            hintStyle: const TextStyle(color: Colors.black54),
                             prefixIcon: const Icon(Icons.lock_outlined,
-                                color: Colors.black54), // Update color
+                                color: Colors.black54),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _obscurePassword
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Colors.black54, // Add this line
+                                color: Colors.black54,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -277,8 +264,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Theme.of(context).primaryColor),
                             ),
                             filled: true,
-                            fillColor: Colors.white.withOpacity(
-                                0.9), // Increase opacity for better readability
+                            fillColor: Colors.white.withOpacity(0.9),
                           ),
                           textInputAction: TextInputAction.done,
                           enabled: !auth.isLoading,
@@ -287,7 +273,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 16),
 
-                        // Forgot Password
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
@@ -306,7 +291,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 24),
 
-                        // Sign In Button
                         ElevatedButton(
                           onPressed: auth.isLoading ? null : _handleSignIn,
                           style: ElevatedButton.styleFrom(
@@ -336,7 +320,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 24),
 
-                        // Sign Up Link
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -359,7 +342,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 16),
 
-                        // Divider
                         const Row(
                           children: [
                             Expanded(child: Divider()),
@@ -375,7 +357,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 16),
 
-                        // Google Sign In Button
                         OutlinedButton.icon(
                           onPressed: auth.isLoading
                               ? null
