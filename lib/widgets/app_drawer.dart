@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/providers/spotify_provider.dart';
+import 'package:SpotyPoty/providers/spotify_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
@@ -9,7 +9,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.read<AuthProvider>();
     final user = auth.user;
-    
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -19,7 +19,7 @@ class AppDrawer extends StatelessWidget {
             accountEmail: Text(user?.email ?? ''),
             currentAccountPicture: CircleAvatar(
               child: Text(
-                user?.displayName?.substring(0, 1).toUpperCase() ?? '?', 
+                user?.displayName?.substring(0, 1).toUpperCase() ?? '?',
                 style: const TextStyle(fontSize: 24),
               ),
             ),
@@ -36,21 +36,17 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () async {
-                final spotifyProvider = context.read<SpotifyProvider>();
-                spotifyProvider.clearFavorites();
-                  Navigator.pop(context); // Close the drawer first
+              final spotifyProvider = context.read<SpotifyProvider>();
+              spotifyProvider.clearFavorites();
+              Navigator.pop(context); // Close the drawer first
               try {
                 await auth.signOut();
                 // Clear all routes and go to login
                 Navigator.pushNamedAndRemoveUntil(
-                  context, 
-                  '/login', 
-                  (route) => false
-                );
+                    context, '/login', (route) => false);
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Logout failed: ${e.toString()}'))
-                );
+                    SnackBar(content: Text('Logout failed: ${e.toString()}')));
               }
             },
           ),

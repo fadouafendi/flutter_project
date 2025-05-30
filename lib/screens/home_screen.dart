@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/favorites_screen.dart';
+import 'package:SpotyPoty/screens/favorites_screen.dart';
 
 import '../widgets/app_drawer.dart';
 import 'tracks_list_screen.dart';
@@ -18,14 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-  _currentIndex == 0
-      ? 'Top Tracks'
-      : _currentIndex == 1
-          ? 'Top Artists'
-          : 'Your Favorites'
-),),
-          
+        title: Text(_currentIndex == 0
+            ? 'Top Tracks'
+            : _currentIndex == 1
+                ? 'Top Artists'
+                : 'Your Favorites'),
+      ),
       drawer: AppDrawer(),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -34,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.music_note), label: 'Tracks'),
           BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Artists'),
-           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Favorites'),
         ],
         onTap: (i) => setState(() => _currentIndex = i),
       ),

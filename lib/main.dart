@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/firebase_options.dart';
-import 'package:flutter_application_1/screens/favorites_screen.dart';
-import 'package:flutter_application_1/screens/splash_screen.dart';
+import 'package:SpotyPoty/firebase_options.dart';
+import 'package:SpotyPoty/screens/favorites_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +14,7 @@ import 'screens/profile_screen.dart';
 import 'screens/track_detail_screen.dart';
 import 'screens/artist_detail_screen.dart';
 
-import 'package:flutter_application_1/theme/spotify_colors.dart';
+import 'package:SpotyPoty/theme/spotify_colors.dart';
 
 Future<FirebaseApp> _initFirebase() async {
   try {
@@ -54,30 +53,22 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: SpotifyColors.spotifyGreen,
         scaffoldBackgroundColor: SpotifyColors.background,
-
-        // Use ColorScheme to keep things consistent
         colorScheme: ColorScheme.dark(
           primary: SpotifyColors.spotifyGreen,
           onPrimary: SpotifyColors.onBackground,
           background: SpotifyColors.background,
           onBackground: SpotifyColors.onBackground,
         ),
-
-        // AppBar styling
         appBarTheme: AppBarTheme(
           backgroundColor: SpotifyColors.background,
           foregroundColor: SpotifyColors.spotifyGreen,
           elevation: 0,
         ),
-
-        // BottomNavigationBar styling
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: SpotifyColors.background,
           selectedItemColor: SpotifyColors.spotifyGreen,
           unselectedItemColor: Colors.grey,
         ),
-
-        // Elevated buttons (e.g. Play Preview, Sign In)
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             foregroundColor: SpotifyColors.onBackground,
@@ -87,8 +78,6 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-
-        // Text styling defaults
         textTheme: TextTheme(
           bodyLarge: TextStyle(color: SpotifyColors.onBackground),
           bodyMedium: TextStyle(color: SpotifyColors.onBackground),
@@ -101,8 +90,6 @@ class MyApp extends StatelessWidget {
         '/profile': (_) => ProfileScreen(),
         '/trackDetail': (_) => TrackDetailScreen(),
         '/artistDetail': (_) => ArtistDetailScreen(),
-        '/facorites': (_) => FavoritesScreen(),
-        '/splash': (_) => SplashScreen(onComplete: () {  },),
         '/main-screen': (_) => HomeScreen(),
       },
       home: AuthWrapper(),
